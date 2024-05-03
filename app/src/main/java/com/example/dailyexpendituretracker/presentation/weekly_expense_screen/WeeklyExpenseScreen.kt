@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,12 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.dailyexpendituretracker.domain.viewmodel.WeeklyExpenseViewModel
-import com.example.dailyexpendituretracker.presentation.Screen
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
 
 @Composable
 fun WeeklyExpenseScreen(
@@ -36,14 +34,12 @@ fun WeeklyExpenseScreen(
 
     val barEntries by viewModel.barEntries.collectAsState()
 
-    Column(modifier = Modifier
+    Column(modifier = modifier
         .fillMaxWidth()
         .padding(16.dp)) {
         Text(text = "Past 6 days expenses")
 
-        Box(
-            modifier = modifier.fillMaxSize()
-        ) {
+        Box{
 
             Log.e("ExpenseRepository", "barEntries: $barEntries")
             val dataSet = BarDataSet(barEntries, "Expenses").apply {
@@ -73,6 +69,7 @@ fun WeeklyExpenseScreen(
                     .height(300.dp))
             }
         }
+        Spacer(modifier = Modifier.size(16.dp))
         Text(text = "y-axis: Amount, x-axis: Days")
     }
 }
